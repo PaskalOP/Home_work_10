@@ -30,12 +30,22 @@ public class TaskThird {
          }
          return wordsCount;
      }
+     private List <Map.Entry<String,Integer>> sortMap(Map<String,Integer> wordsCount){
+         List<Map.Entry<String,Integer>> sortedSetEnrty = new ArrayList<>(wordsCount.entrySet());
+         Comparator<Map.Entry<String, Integer>> cp = new Comparator<Map.Entry<String, Integer>>() {
+             @Override
+             public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+                 return o2.getValue().compareTo(o1.getValue());
+             }
+         };
+         Collections.sort(sortedSetEnrty,cp);
+         return sortedSetEnrty;
+     }
      public void printWordsCount() throws IOException {
          Map<String,Integer> words = getCountWords();
-        // Set<Map.Entry<String,Integer>> entryset = words.entrySet();
-         for (Map.Entry<String,Integer> item:words.entrySet()) {
+         List <Map.Entry<String,Integer>> sortedList = sortMap(words);
+         for (Map.Entry<String,Integer> item:sortedList) {
              System.out.println(item.getKey() + " - " + item.getValue());
-
          }
      }
 
